@@ -1,0 +1,48 @@
+package Gasbooking;
+
+import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+
+public class Delivery extends Booking {
+
+    public static String mobile;
+	public static String delMobileNo;
+	public String delPersonName;
+    int customerOtp;
+	 public int numberOfCylinders;
+	public String pincode;
+
+    public Delivery(String name, String street, String area, String string, String string2, int numOfCylinder) {
+        super(name, street, area, string, string2, numOfCylinder);
+    }
+
+    public void amountCalc() {
+        long dayDiff = dt_2.getTime() - dt_1.getTime(); // Calculate the difference between two dates
+        long newDiff = TimeUnit.DAYS.convert(dayDiff, TimeUnit.MILLISECONDS); // Convert to days
+
+        if (newDiff > 7) {
+            refund = 41.25;
+            amount = amount - refund;
+        }
+    }
+
+    public void verifyOtp() {
+        if (status.equals("b")) {
+            System.out.println("Enter the OTP:");
+            customerOtp = new Scanner(System.in).nextInt();
+
+            if (customerOtp != otp) {
+                status = "c"; // OTP mismatch; status is set to 'c'
+            } else {
+                status = "D"; // OTP verified; status is set to 'D'
+            }
+        } else {
+            System.out.println("No booking found");
+        }
+    }
+
+    public void delPersonDetails() {
+        System.out.println("Enter the delivery person name:");
+        delPersonName = new Scanner(System.in).nextLine();
+    }
+}
