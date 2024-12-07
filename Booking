@@ -1,0 +1,80 @@
+package Gasbooking;
+import Customers.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
+public class Booking extends GasConnetion {
+    public int otp = 1269;
+    public Double amount = (double) 850, refund = (double) 0;
+    public String dt, deliveryDate, mobileNumber = "7904598598", status, Status;
+    public Date dt_1, dt_2, lastDate;
+
+    public Booking(String name, String street, String area, String string, String string2, int numOfCylider) {
+        super(name, street, area, string, string2, numOfCylider);
+    }
+
+    public void getDates() {
+        System.out.println("Enter the Booking date (dd/MM/yyyy):");
+        dt = new Scanner(System.in).next();
+        dt_1 = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        try {
+            dt_1 = dateFormat.parse(dt);
+        } catch (Exception e) {
+            System.out.println("Error in getDates function: " + e);
+        }
+
+        System.out.println("Enter the delivery date (dd/MM/yyyy):");
+        deliveryDate = new Scanner(System.in).nextLine();
+
+        try {
+            dt_2 = dateFormat.parse(deliveryDate);
+        } catch (Exception exp) {
+            System.out.println("Error in parsing delivery date: " + exp);
+        }
+
+        try {
+            long difference = dt_2.getTime() - dt_1.getTime();
+            long newDifference = TimeUnit.DAYS.convert(difference, TimeUnit.MILLISECONDS);
+
+            if (newDifference > 7) {
+                status = "Pending";
+            } else {
+                status = "Scheduled";
+            }
+        } catch (Exception e) {
+            System.out.println("Error calculating date difference: " + e);
+        }
+    }
+
+    public void validate() {
+        if (lastDate == null) {
+            lastDate = new Date(); // Initialize lastDate if it's null
+        }
+
+        long elapsedms = dt_1.getTime() - lastDate.getTime();
+        long diff = TimeUnit.DAYS.convert(elapsedms, TimeUnit.MILLISECONDS);
+
+        System.out.println("Difference between two dates: " + diff);
+
+        if (numOfCylider == 1) {
+            if (diff < 30) {
+                System.out.println("Booking cannot be done");
+                status = "Cancelled";
+            } else {
+                status = "Booked";
+                lastDate = dt_1;
+            }
+        } else if (numOfCylider == 2) {
+            if (diff < 50) {
+                System.out.println("Booking cannot be done");
+                status = "Cancelled";
+            } else {
+                status = "Booked";
+                lastDate = dt_1;
+            }
+        }
+    }
+}
