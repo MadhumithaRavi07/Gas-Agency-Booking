@@ -1,0 +1,37 @@
+package Customers;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class GasConnetion extends Customer{
+	protected int numOfCylider;
+	String date;
+	 static int connectionNumber=102;
+	 {
+		 connectionNumber+=1;
+	 }
+	 Date lastDate=null;
+	 SimpleDateFormat dateFormat=new SimpleDateFormat( "dd/mm/yyyy");
+	 
+	 public GasConnetion(String name, String street, String area, String string, String string2, int numOfCylider) {
+		super(name, street, area, string, string2);
+		this.numOfCylider = numOfCylider;
+	}
+	
+	 
+	 public void getLastDate() {
+		 
+		 System.out.println("Ener the lastdate:");
+		 date=new Scanner(System.in).nextLine();
+		 
+		 try {
+		 lastDate=dateFormat.parse(date);
+		 }catch (ParseException e)
+		 {
+			 System.out.println("Error in last getDate:" + e);
+		 }
+	 }
+
+}
