@@ -1,0 +1,20 @@
+package gasSupplier;
+
+public interface gasAgency {
+	 public String agencyName="Dhanalakshmi";
+	    public int code=8756;
+	    public long phoneNumber = 7904558889L;
+	    public int pinCode = 790318;
+	    default void show(){
+	        System.out.println("the agency name is :  "+agencyName);
+	        System.out.println("the agency phone number is:"+phoneNumber);
+	        System.out.println("the agency code is :  "+code);
+	        System.out.println("the agency pincode is :  "+ pinCode);
+	        
+	        
+	    }
+	    
+
+	
+
+}
