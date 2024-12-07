@@ -1,0 +1,20 @@
+package Customers;
+import gasSupplier.gasAgency;
+
+public class Customer {
+    public String name;
+	public String street;
+	public String area;
+	String phoneNumber;
+	String pinCode;
+	public Customer(String name,String street,String area,String string,
+	String string2) {
+		this.name=name;
+		this.street=street;
+		this.area=area;
+		this.phoneNumber=string;
+		this.pinCode=string2;
+		}
+	
+
+}
